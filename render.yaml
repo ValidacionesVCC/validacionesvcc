@@ -1,1 +1,18 @@
 
+services:
+  - type: web
+    name: validacionesvcc
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn proyecto1.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: DJANGO_SETTINGS_MODULE
+        value: proyecto1.settings
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: SECRET_KEY
+        generateValue: true
+
+staticPublishPath: staticfiles
