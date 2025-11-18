@@ -9,16 +9,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -------------------------------------------------------------------
 # SECURITY
 # -------------------------------------------------------------------
-SECRET_KEY = 'django-insecure-cm*3=fg_4%@asdo7uyj*-&$(mx-p-yt_208+48_r$$m2da6tlt'
-DEBUG = True
+SECRET_KEY = os.getenv("SECRET_KEY", "dev_key")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "www.validacionesvcc.com", "validacionesvcc.com"]
+# DEBUG solo activo en local (Render NO establece RENDER="")
+DEBUG = os.getenv("RENDER") == ""
+
+# Permitidos
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "www.validacionesvcc.com",
+    "validacionesvcc.com"
+]
 
 # -------------------------------------------------------------------
-# REDIRECCION
+# SSL – solo en Render (EVITA LOOP INFINITO)
 # -------------------------------------------------------------------
-
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = os.getenv("RENDER", "") != ""
 
 # -------------------------------------------------------------------
 # APPS
@@ -55,7 +62,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'proyecto1.urls'
 
 # -------------------------------------------------------------------
-# TEMPLATES (FALTABA – ESTA ES LA PARTE CRÍTICA)
+# TEMPLATES
 # -------------------------------------------------------------------
 TEMPLATES = [
     {
@@ -92,18 +99,10 @@ DATABASES = {
 # PASSWORD VALIDATION
 # -------------------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # -------------------------------------------------------------------
@@ -123,11 +122,15 @@ USE_TZ = True
 # STATIC FILES
 # -------------------------------------------------------------------
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
+# Carpeta donde Django guardará archivos al hacer collectstatic
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Solo en desarrollo se usan archivos en /static
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
 
 # -------------------------------------------------------------------
 # DEFAULT AUTO FIELD
