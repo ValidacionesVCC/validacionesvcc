@@ -13,5 +13,7 @@ services:
         value: 4
       - key: SECRET_KEY
         generateValue: true
+      - key: RENDER
+        value: "1"
 
 staticPublishPath: staticfiles
