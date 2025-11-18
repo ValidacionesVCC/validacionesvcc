@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingreso de usuarios Aplicativos</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+</head>
+
+<body>
+
+    <!-- Barra superior -->
+    <header class="topbar">
+        <div class="brand">
+            <img src="{% static 'accounts/img/logo.jpg' %}" class="logo">
+            <span class="title">Ingreso de usuarios Aplicativos</span>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h2>Ingresar</h2>
+
+            {% if messages %}
+                {% for m in messages %}
+                    <p class="msg">{{ m }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label>Usuario</label>
+                <input type="text" name="username" placeholder="Ingrese su usuario" required>
+
+                <label>Contraseña</label>
+                <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+
+                <!-- BOTÓN INGRESAR -->
+                <button type="submit" class="btn-login">Ingresar</button>
+            </form>
+
+            <!-- BOTÓN REGISTRARSE ABAJO -->
+           <div class="register-container">
+    <a href="{% url 'register' %}" class="btn-register">
+        Registrarse
+    </a>
+</div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+

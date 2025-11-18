@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro</title>
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background: white;
+            width: 350px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #198754;
+            color: white;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        p.error {
+            color: red;
+            text-align: center;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Crear Cuenta</h2>
+
+    {% if messages %}
+        {% for msg in messages %}
+            <p class="error">{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Usuario" required>
+        <input type="email" name="email" placeholder="Correo" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+
+        <button type="submit">Registrarse</button>
+
+        <a href="{% url 'login' %}">Volver al login</a>
+    </form>
+</div>
+
+</body>
+</html>

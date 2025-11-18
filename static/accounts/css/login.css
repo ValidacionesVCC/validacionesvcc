@@ -1,0 +1,127 @@
+/* Fondo estilo fibra */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0d0d0d url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+    background-size: 300px;
+    color: white;
+}
+
+/* Barra superior */
+.topbar {
+    width: 100%;
+    background: #000;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 45px;
+    margin-right: 12px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Caja del login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.login-box {
+    width: 420px;
+    background: rgba(0,0,0,0.75);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.login-box h2 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Campos */
+label {
+    display: block;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 6px;
+    background: #1b1b1b;
+    color: white;
+    font-size: 15px;
+}
+
+/* Botón Ingresar */
+button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    background: #1877F2;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #0f5dc3;
+}
+
+/* Mensajes */
+.msg {
+    background: darkred;
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+/* Contenedor del botón Registrarse */
+.register-container {
+    text-align: center;
+    margin-top: 18px;
+}
+
+/* Botón Registrarse */
+.btn-register {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid #1877F2;
+    color: #1877F2;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+/* Hover del botón Registrarse */
+.btn-register:hover {
+    background: #1877F2;
+    color: white;
+}
