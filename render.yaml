@@ -4,11 +4,15 @@ services:
     env: python
     region: oregon
     plan: free
+
     buildCommand: |
       apt-get update
       apt-get install -y ghostscript
       pip install -r requirements.txt
-    startCommand: gunicorn core.wsgi:application
+      python manage.py collectstatic --noinput
+
+    startCommand: gunicorn proyecto1.wsgi:application
+
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
