@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views   # ← Importa correctamente las vistas
+from . import views
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
