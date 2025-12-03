@@ -56,17 +56,23 @@
             pointer-events: none;
         }
 
+        /* -------------------------------
+           LOGO CLEAN – PERFECTO VCC
+        --------------------------------*/
         .logo-wrapper {
             display: flex;
             justify-content: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            margin-top: 4px;
         }
 
         .logo-wrapper img {
-            width: 120px;
+            width: 95px;              /* ✔ tamaño exacto */
             height: auto;
-            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
-            border-radius: 18px;
+            object-fit: contain;      /* ✔ mantiene proporción */
+            display: block;
+            filter: none;             /* ✔ nada de blur */
+            border-radius: 12px;      /* ✔ borde suave */
         }
 
         h1 {
@@ -182,8 +188,11 @@
         }
     </style>
 </head>
+
 <body>
     <div class="card">
+
+        <!-- LOGO -->
         <div class="logo-wrapper">
             <img src="{% static 'img/logo-vcc.png' %}" alt="Validaciones VCC">
         </div>
