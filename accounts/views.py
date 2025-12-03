@@ -16,7 +16,10 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect("inicio")   # ← Asegúrate que esta ruta existe
+
+            # ESTA RUTA DEBE EXISTIR EN core/urls.py
+            return redirect("inicio")
+
         else:
             messages.error(request, "Usuario o contraseña incorrectos")
 
@@ -28,7 +31,9 @@ def login_view(request):
 # ----------------------
 def logout_view(request):
     logout(request)
-    return redirect('login')   # ← esta ruta debe existir en accounts/urls.py
+
+    # ESTA RUTA EXISTE EN accounts/urls.py
+    return redirect("login")
 
 
 # ----------------------
@@ -40,12 +45,17 @@ def register_view(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
 
+        # Validación: usuario ya existe
         if User.objects.filter(username=username).exists():
             messages.error(request, "El usuario ya existe")
             return redirect("register")
 
-        user = User.objects.create_user(username=username, email=email, password=password)
-        user.save()
+        # Crear usuario
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
 
         messages.success(request, "Cuenta creada correctamente")
         return redirect("login")
