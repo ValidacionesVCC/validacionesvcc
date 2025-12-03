@@ -37,18 +37,15 @@ def convertir_pdf_en_imagenes_pdf(request):
     if not pdf_bytes:
         return JsonResponse({"error": "No se recibió ningún PDF"}, status=400)
 
-    # Procesamiento temporal
+
     with tempfile.TemporaryDirectory() as tmpdir:
 
-        # Guardar PDF temporal
         input_pdf = os.path.join(tmpdir, "entrada.pdf")
         with open(input_pdf, "wb") as f:
             f.write(pdf_bytes)
 
-        # Patrón de imágenes de salida
         output_pattern = os.path.join(tmpdir, "pagina-%04d.png")
 
-        # Comando Ghostscript
         gs_cmd = [
             "gs",
             "-dSAFER",
@@ -63,15 +60,15 @@ def convertir_pdf_en_imagenes_pdf(request):
         try:
             subprocess.check_call(gs_cmd)
         except Exception as e:
-            return JsonResponse({"error": "Ghostscript falló", "detalle": str(e)}, status=500)
+            return JsonResponse(
+                {"error": "Ghostscript falló", "detalle": str(e)}, status=500
+            )
 
-        # Listar páginas generadas
         pages = sorted([p for p in os.listdir(tmpdir) if p.endswith(".png")])
 
         if not pages:
             return JsonResponse({"error": "No se generaron imágenes"}, status=500)
 
-        # Crear PDF final
         salida_pdf = os.path.join(tmpdir, "salida.pdf")
         c = canvas.Canvas(salida_pdf, pagesize=A4)
         width, height = A4
@@ -95,8 +92,6 @@ def convertir_pdf_en_imagenes_pdf(request):
         with open(salida_pdf, "rb") as f:
             final_bytes = f.read()
 
-    # Respuesta final
     response = HttpResponse(final_bytes, content_type="application/pdf")
     response["Content-Disposition"] = 'attachment; filename="pdf_solo_imagenes.pdf"'
     return response
-
