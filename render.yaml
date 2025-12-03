@@ -2,8 +2,8 @@ services:
   - type: web
     name: validacionesvcc
     env: python
-    region: oregon
     plan: free
+    region: oregon
 
     buildCommand: |
       pip install -r requirements.txt
@@ -14,3 +14,11 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
+      - key: DJANGO_SETTINGS_MODULE
+        value: proyecto1.settings
+      - key: SECRET_KEY
+        sync: false  # podrás agregarlo desde el dashboard
+
+    disk:
+      name: staticfiles
+      mountPath: /staticfiles
