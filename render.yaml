@@ -6,6 +6,8 @@ services:
     region: oregon
 
     buildCommand: |
+      apt-get update
+      apt-get install -y ghostscript
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
 
@@ -17,7 +19,7 @@ services:
       - key: DJANGO_SETTINGS_MODULE
         value: proyecto1.settings
       - key: SECRET_KEY
-        sync: false  # podrás agregarlo desde el dashboard
+        sync: false
 
     disk:
       name: staticfiles
