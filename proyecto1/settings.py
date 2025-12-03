@@ -83,15 +83,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # -------------------------------------------------------------------
 
 STATIC_URL = "/static/"
-
-# Carpeta donde Render deposita los archivos generados por collectstatic
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [ BASE_DIR / "static" ]
 
-# Carpeta donde tú guardas tus archivos /static/
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# motor estándar para manejar archivos estáticos
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
