@@ -122,13 +122,19 @@ USE_TZ = True
 # -------------------------------------------------------------------
 # STATIC FILES
 # -------------------------------------------------------------------
+# -------------------------------------------------------------------
+# ARCHIVOS ESTÁTICOS — FUNCIONA EN RENDER
+# -------------------------------------------------------------------
+
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"   # Render usará esto
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
+# Siempre incluir carpeta /static/ del proyecto (aunque DEBUG esté en False)
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# MUY IMPORTANTE
+# Asegurar que Django indexe los archivos dentro de static/
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
+
