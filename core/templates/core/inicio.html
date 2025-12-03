@@ -1,3 +1,9 @@
-<h1>Bienvenido {{ request.user.username }}</h1>
+{% extends "base.html" %}
 
-<p><a href="/accounts/logout/">Cerrar sesión</a></p>
+{% block title %}Inicio - Validaciones VCC{% endblock %}
+
+{% block content %}
+    <h1>Panel principal</h1>
+    <p>Bienvenido al ecosistema de Validaciones VCC.</p>
+    <!-- aquí irán tus tarjetas, tablas, semáforos, etc. -->
+{% endblock %}
