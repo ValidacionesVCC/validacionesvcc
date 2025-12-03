@@ -27,8 +27,12 @@ INSTALLED_APPS = [
     'core',
 ]
 
+# ---------------------------------------------------------
+# 🔵 MIDDLEWARE — Con WhiteNoise correctamente POSICIONADO
+# ---------------------------------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # ← ESTA LÍNEA ES CLAVE
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,13 +83,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # -------------------------------------------------------------------
-# 🔵 STATIC Y MEDIA — CONFIGURACIÓN OFICIAL PARA RENDER
+# 🔵 STATICFILES — CONFIGURACIÓN OFICIAL PARA RENDER + WHITENOISE
 # -------------------------------------------------------------------
 
 STATIC_URL = "/static/"
+
+# Carpeta donde Django dejará los archivos procesados
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [ BASE_DIR / "static" ]
 
+# Carpeta donde tú guardas tu carpeta /static/
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# WhiteNoise storage
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-
