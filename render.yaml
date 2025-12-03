@@ -2,18 +2,13 @@ services:
   - type: web
     name: validacionesvcc
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn proyecto1.wsgi:application"
+    region: oregon
+    plan: free
+    buildCommand: |
+      apt-get update
+      apt-get install -y ghostscript
+      pip install -r requirements.txt
+    startCommand: gunicorn core.wsgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
-      - key: DJANGO_SETTINGS_MODULE
-        value: proyecto1.settings
-      - key: WEB_CONCURRENCY
-        value: 4
-      - key: SECRET_KEY
-        generateValue: true
-      - key: RENDER
-        value: "1"
-
-staticPublishPath: staticfiles
