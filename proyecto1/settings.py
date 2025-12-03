@@ -124,16 +124,11 @@ USE_TZ = True
 # -------------------------------------------------------------------
 STATIC_URL = '/static/'
 
-# 🔥 IMPORTANTE: siempre incluir /static/ (en desarrollo y producción)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# Para collectstatic en Render
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-
-# -------------------------------------------------------------------
-# DEFAULT AUTO FIELD
-# -------------------------------------------------------------------
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# MUY IMPORTANTE
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
