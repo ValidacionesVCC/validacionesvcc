@@ -1,36 +1,21 @@
 from pathlib import Path
 import os
 
-# -------------------------------------------------------------------
-# BASE DIR
-# -------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# -------------------------------------------------------------------
-# SECURITY
-# -------------------------------------------------------------------
 SECRET_KEY = os.getenv("SECRET_KEY", "dev_key")
-
-# DEBUG
 DEBUG = os.getenv("RENDER") == ""
 
-# Permitidos
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "www.validacionesvcc.com",
     "validacionesvcc.com",
+    "www.validacionesvcc.com",
     "validacionesvcc.onrender.com",
 ]
 
-# -------------------------------------------------------------------
-# SSL – solo en Render (EVITA LOOP INFINITO)
-# -------------------------------------------------------------------
 SECURE_SSL_REDIRECT = os.getenv("RENDER", "") != ""
 
-# -------------------------------------------------------------------
-# APPS
-# -------------------------------------------------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,15 +23,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # apps del proyecto
     'accounts',
     'core',
 ]
 
-# -------------------------------------------------------------------
-# MIDDLEWARE
-# -------------------------------------------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,18 +37,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# -------------------------------------------------------------------
-# URL PRINCIPAL DEL PROYECTO
-# -------------------------------------------------------------------
 ROOT_URLCONF = 'proyecto1.urls'
 
-# -------------------------------------------------------------------
-# TEMPLATES
-# -------------------------------------------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # carpeta global
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,14 +55,8 @@ TEMPLATES = [
     },
 ]
 
-# -------------------------------------------------------------------
-# WSGI
-# -------------------------------------------------------------------
 WSGI_APPLICATION = 'proyecto1.wsgi.application'
 
-# -------------------------------------------------------------------
-# DATABASE
-# -------------------------------------------------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -96,9 +64,6 @@ DATABASES = {
     }
 }
 
-# -------------------------------------------------------------------
-# PASSWORD VALIDATION
-# -------------------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -106,32 +71,27 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# -------------------------------------------------------------------
-# LANGUAGE
-# -------------------------------------------------------------------
 LANGUAGE_CODE = 'es'
-
-# -------------------------------------------------------------------
-# TIMEZONE
-# -------------------------------------------------------------------
 TIME_ZONE = 'America/Bogota'
-
 USE_I18N = True
 USE_TZ = True
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # -------------------------------------------------------------------
-# STATIC FILES
+# 🔵 STATIC Y MEDIA — CONFIGURACIÓN OFICIAL PARA RENDER
 # -------------------------------------------------------------------
-# -------------------------------------------------------------------
-# ARCHIVOS ESTÁTICOS — FUNCIONA EN RENDER
-# -------------------------------------------------------------------
-STATIC_URL = '/static/'
+
+STATIC_URL = "/static/"
+
+# Carpeta donde Render deposita los archivos generados por collectstatic
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# Carpeta donde tú guardas tus archivos /static/
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+# motor estándar para manejar archivos estáticos
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
-
 
