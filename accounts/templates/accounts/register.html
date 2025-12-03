@@ -5,15 +5,189 @@
     <meta charset="UTF-8">
     <title>Registro - Validaciones VCC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- reutilizamos casi todo el CSS del login -->
+
     <style>
-        /* puedes copiar exactamente los estilos del login.html
-           y sólo cambiar el título y el formulario */
-        /* … para no repetir los pego resumidos: */
+        :root {
+            --vcc-azul: #2D67B3;
+            --vcc-verde: #26B160;
+            --vcc-rojo: #E03B3B;
+            --vcc-fondo: #F3F5FC;
+            --vcc-texto: #1D2330;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #ffffff 0, #e3ebff 40%, #d6e1ff 70%, #cbd7ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--vcc-texto);
+        }
+
+        .card {
+            background: #fff;
+            width: 380px;
+            max-width: 92%;
+            border-radius: 22px;
+            box-shadow:
+                0 18px 45px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(255,255,255,0.6) inset;
+            padding: 32px 32px 26px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(45,103,179,0.22), transparent 60%);
+            top: -80px;
+            right: -80px;
+            pointer-events: none;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+            margin-top: 4px;
+        }
+
+        .logo-wrapper img {
+            width: 95px;
+            height: auto;
+            object-fit: contain;
+            filter: none;
+            border-radius: 12px;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.03em;
+        }
+
+        .subtitle {
+            font-size: 0.83rem;
+            color: #707892;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            color: #4a4f63;
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d1d5e6;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        input:focus {
+            border-color: var(--vcc-azul);
+            box-shadow: 0 0 0 2px rgba(45,103,179,0.18);
+        }
+
+        .btn-primary {
+            width: 100%;
+            margin-top: 6px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--vcc-azul), #204a86);
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            font-size: 0.92rem;
+            box-shadow: 0 10px 20px rgba(45,103,179,0.35);
+            transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 28px rgba(45,103,179,0.42);
+            filter: brightness(1.05);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 8px 18px rgba(45,103,179,0.3);
+        }
+
+        .extra {
+            margin-top: 18px;
+            font-size: 0.8rem;
+            color: #72788c;
+        }
+
+        .extra a {
+            color: var(--vcc-azul);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .extra a:hover {
+            text-decoration: underline;
+        }
+
+        .messages {
+            margin-bottom: 10px;
+        }
+
+        .messages li {
+            list-style: none;
+            font-size: 0.78rem;
+            padding: 6px 10px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+        }
+
+        .messages .error {
+            background: #ffe6e6;
+            color: #8d1a1a;
+            border: 1px solid #f3b4b4;
+        }
+
+        .messages .success {
+            background: #eafff3;
+            color: #146b32;
+            border: 1px solid #a6e3c0;
+        }
     </style>
 </head>
+
 <body>
     <div class="card">
+
         <div class="logo-wrapper">
             <img src="{% static 'img/logo-vcc.png' %}" alt="Validaciones VCC">
         </div>
@@ -33,17 +207,17 @@
             {% csrf_token %}
             <div class="field">
                 <label for="id_username">Usuario</label>
-                <input type="text" id="id_username" name="username" required>
+                <input type="text" id="id_username" name="username" placeholder="Ingresa un usuario" required>
             </div>
 
             <div class="field">
                 <label for="id_email">Correo electrónico</label>
-                <input type="email" id="id_email" name="email" required>
+                <input type="email" id="id_email" name="email" placeholder="Ingresa tu correo" required>
             </div>
 
             <div class="field">
                 <label for="id_password">Contraseña</label>
-                <input type="password" id="id_password" name="password" required>
+                <input type="password" id="id_password" name="password" placeholder="Crea una contraseña" required>
             </div>
 
             <button type="submit" class="btn-primary">Crear cuenta</button>
