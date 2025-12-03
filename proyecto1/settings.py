@@ -19,7 +19,8 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
     "www.validacionesvcc.com",
-    "validacionesvcc.com"
+    "validacionesvcc.com",
+    "validacionesvcc.onrender.com",  # ← AGREGADO
 ]
 
 # -------------------------------------------------------------------
