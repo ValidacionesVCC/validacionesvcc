@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -------------------------------------------------------------------
 SECRET_KEY = os.getenv("SECRET_KEY", "dev_key")
 
-# DEBUG solo activo en local (Render NO establece RENDER="")
+# DEBUG
 DEBUG = os.getenv("RENDER") == ""
 
 # Permitidos
@@ -20,7 +20,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "www.validacionesvcc.com",
     "validacionesvcc.com",
-    "validacionesvcc.onrender.com",  # ← AGREGADO
+    "validacionesvcc.onrender.com",
 ]
 
 # -------------------------------------------------------------------
@@ -124,14 +124,14 @@ USE_TZ = True
 # -------------------------------------------------------------------
 STATIC_URL = '/static/'
 
-# Carpeta donde Django guardará archivos al hacer collectstatic
+# 🔥 IMPORTANTE: siempre incluir /static/ (en desarrollo y producción)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Para collectstatic en Render
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Solo en desarrollo se usan archivos en /static
-if DEBUG:
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-    ]
 
 # -------------------------------------------------------------------
 # DEFAULT AUTO FIELD
